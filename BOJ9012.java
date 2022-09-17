@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -13,21 +14,30 @@ public class BOJ9012 {
             for (int j = 0; j < s.length(); j++) {
                 switch (s.charAt(j)) {
                     case '(':
-                    case '{':
-                    case '[':
                         stack.push(s.charAt(j));
                         break;
                     case ')':
-                        if (stack.peek() == ')') {
-                            stack.pop();
-                        } else {
-                            
+                        try {
+                            if (stack.peek() == '(') {
+                                stack.pop();
+                            } else {
+                                vps = false;
+                            }
+                            break;
+                        } catch (EmptyStackException e) {
+                            vps = false;
+                            break;
                         }
-                        break;
-                    case '}':
-                    case ']':
                 }
+                if (!vps) break;
             }
+            if (!stack.empty()) vps = false;
+            if (vps) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+            stack.clear();
         }
     }
 }
