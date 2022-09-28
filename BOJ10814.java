@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -23,6 +24,7 @@ public class BOJ10814 {
                 return a[0] - b[0];
             }
         });
+
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
             sb.append(age[i][0]).append(" ").append(name[age[i][1]]).append("\n");

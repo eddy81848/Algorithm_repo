@@ -21,6 +21,7 @@ public class BOJ11650 {
                 return a[0] - b[0];
             }
         });
+
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < n; i++) {
             stringBuilder.append(arr[i][0]).append(" ").append(arr[i][1]).append("\n");
