@@ -20,7 +20,7 @@ public class BOJ24444 {
         boolean[] visited = new boolean[n + 1]; //노드가 방문되었는지 확인하기 위한 배열
         int[] visitedOrder = new int[n]; //방문 순서를 담을 배열
         boolean[] contain = new boolean[n + 1]; //노드가 큐에 있는지 판단하기 위한 배열
-        PriorityQueue<Integer>[] list = new PriorityQueue[n + 1];//간선을 표현하기 위한 우선순위 큐를 담고 있는 연결리스트
+        PriorityQueue<Integer>[] list = new PriorityQueue[n + 1];//간선을 표현하기 위한 우선순위 큐 배열
         LinkedList<Integer> queue = new LinkedList<>(); //bfs에서 사용할 큐
 
         //초기화
