@@ -8,13 +8,12 @@ public class BOJ1427 {
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
         LinkedList<Integer> list = new LinkedList<>();
         String s = bufferedReader.readLine();
-        int size = s.length();
-        for (int i = 0; i < size; i++) {
-            list.add(Integer.parseInt(String.valueOf(s.charAt(i))));
+        for (int i = 0; i < s.length(); i++) {
+            list.addLast(Integer.parseInt(String.valueOf(s.charAt(i))));
         }
         Collections.sort(list);
-        for (int i = 0; i < size; i++) {
-            bufferedWriter.write(Integer.toString(list.removeLast()));
+        for (int i = 0; i < list.size(); i++) {
+            bufferedWriter.write(list.getLast());
         }
         bufferedWriter.flush();
         bufferedWriter.close();

@@ -15,7 +15,6 @@ public class BOJ1197 {
         union = new int[v + 1];
         int result = 0;
 
-        Arrays.fill(union, -1);
 
         for (int i = 0; i < e; i++) {
             st = new StringTokenizer(br.readLine());
@@ -38,7 +37,7 @@ public class BOJ1197 {
     }
 
     public static int union_find(int v) {
-        if (union[v] == -1) return v;
+        if (union[v] == 0) return v;
         else return union_find(union[v]);
     }
 
