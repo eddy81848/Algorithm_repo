@@ -3,22 +3,20 @@ import java.util.Scanner;
 public class BOJ1929 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        for (int i = n; i <= m; i++) {
-            boolean t = true;
-            if (i == 2) {
-                System.out.println(2);
-                continue;
+        int min = scanner.nextInt();
+        int max = scanner.nextInt();
+        boolean[] prime = new boolean[max + 1];
+        prime[0] = true;
+        prime[1] = true;
+        for (int i = 2; i <= Math.sqrt(max); i++) {
+            for (int j = i * 2; j <= max; j += i) {
+                prime[j] = true;
             }
-            if (i == 1) continue;
-            for (int j = 2; j <= Math.sqrt(i); j++) {
-                if (i % j == 0) {
-                    t = false;
-                    break;
-                }
+        }
+        for (int i = min; i <= max; i++) {
+            if (!prime[i]) {
+                System.out.println(i);
             }
-            if (t) System.out.println(i);
         }
     }
 }

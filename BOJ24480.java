@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 
-public class BOJ24479 {
+public class BOJ24480 {
     public static int n;
     public static int m;
     public static int r;
@@ -43,7 +43,7 @@ public class BOJ24479 {
         }
 
         for (int i = 0; i < n + 1; i++) {
-            Collections.sort(edge[i]);
+            Collections.sort(edge[i], Collections.reverseOrder());
         }
 
         dfs(r);
