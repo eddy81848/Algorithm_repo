@@ -35,15 +35,16 @@ public class BOJ18352 {
         weight[x] = 0;
         visited[x] = true;
         queue.addLast(x);
-        int n, size;
+        int n, size, temp;
         while (!queue.isEmpty()) {
             n = queue.removeFirst();
             size = edge[n].size();
             for (int i = 0; i < size; i++) {
-                if (!visited[edge[n].peekFirst()]) {
-                    weight[edge[n].peekFirst()] = weight[n] + 1;
-                    visited[edge[n].peekFirst()] = true;
-                    queue.addLast(edge[n].removeFirst());
+                temp = edge[n].removeFirst();
+                if (!visited[temp]) {
+                    weight[temp] = weight[n] + 1;
+                    visited[temp] = true;
+                    queue.addLast(temp);
                 }
             }
         }
