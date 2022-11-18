@@ -38,7 +38,7 @@ public class BOJ1197 {
 
     public static int union_find(int v) {
         if (union[v] == 0) return v;
-        else return union_find(union[v]);
+        else return union[v] = union_find(union[v]);
     }
 
     public static void union_set(int v, int s) {
