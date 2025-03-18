@@ -1,5 +1,3 @@
-package src;
-
 import java.util.EmptyStackException;
 import java.util.Scanner;
 import java.util.Stack;

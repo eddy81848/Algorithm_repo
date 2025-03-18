@@ -1,5 +1,3 @@
-package src;
-
 public class BOJ11689 {
     public static void main(String[] args) {
         
