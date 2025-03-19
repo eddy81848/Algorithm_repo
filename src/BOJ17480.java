@@ -125,5 +125,6 @@ public class BOJ17480 {
 
     public static String subString(StringBuilder sb, int start, int end) {
         //문자열 뒤집는 과정에서 문제 생겨서 함수로 뺄 예정..나중에 해야지...
+        return "";
     }
 }
