@@ -28,17 +28,19 @@ public class BOJ17480 {
         for (int i = 0; i < rear; i++) {
             String now = Character.toString(word.charAt(i));
             if (tmpMap.containsKey(now)) {
-                if (tmpMap.get(now) == 1) {
-                    tmpMap.remove(now);
-                } else {
-                    tmpMap.put(now, tmpMap.get(now) - 1);
-                }
+                tmpMap.put(now, tmpMap.get(now) - 1);
             }
         } //초기 substring 확인
+        boolean tmp = true;
+        for (int i : tmpMap.values()) {
+            if (i != 0) {
+                tmp = false;
+                break;
+            }
+        }
 
-        if (tmpMap.isEmpty()) {
-            subStrings.add(word.substring(front, rear - 1));
-            tmpMap = new HashMap<>(map);
+        if (tmp) {
+            subStrings.add(word.substring(front, rear));
         } //초기에 완성 되었으면 LinkedList에 넣기
 
         for (; rear < word.length(); rear++, front++) {
@@ -49,14 +51,16 @@ public class BOJ17480 {
             }
 
             if (map.containsKey(rearStr)) {
-                if (tmpMap.get(rearStr) == 1) {
-                    tmpMap.remove(rearStr);
-                } else {
-                    tmpMap.put(rearStr, tmpMap.get(rearStr) - 1);
+                tmpMap.put(rearStr, tmpMap.get(rearStr) - 1);
+            }
+            tmp = true;
+            for (int i : tmpMap.values()) {
+                if (i != 0) {
+                    tmp = false;
+                    break;
                 }
             }
-
-            if (tmpMap.isEmpty()) {
+            if (tmp) {
                 subStrings.add(word.substring(front + 1, rear + 1));
             }
         } //슬라이딩 윈도우로 substring 확인
@@ -74,8 +78,6 @@ public class BOJ17480 {
     public static void recursion(String word, StringBuilder sb, int start, int end) {
         StringBuilder tmpSb;
         String tmpStr = sb.toString();
-        String reverseStr;
-        int index = word.length() - 1;
         if (start >= end) {
             set.add(sb.toString());
             return;
@@ -83,48 +85,39 @@ public class BOJ17480 {
         if ((end - start + 1) % 2 == 0) {
             //앞을 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - (start + end) / 2, index - start + 1);
-            tmpSb.reverse();
-            tmpSb.replace(start, (start + end) / 2, reverseStr);
+            tmpSb.replace(start, (start + end) / 2 + 1, subStringReverse(tmpSb, start, (start + end) / 2));
             recursion(word, tmpSb, (start + end) / 2 + 1, end);
             //뒤를 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - end, index - (start + end) / 2 + 2);
-            tmpSb.reverse();
-            tmpSb.replace((start + end) / 2 + 1, end, reverseStr);
+            tmpSb.replace((start + end) / 2 + 1, end + 1, subStringReverse(tmpSb, (start + end) / 2 + 1, end));
             recursion(word, tmpSb, start, (start + end) / 2);
         } else {
             //앞이 적을 때
             //앞이 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - ((start + end) / 2 - 1), index - start + 1);
-            tmpSb.reverse();
-            tmpSb.replace(start, (start + end) / 2 - 1, reverseStr);
+            tmpSb.replace(start, (start + end) / 2, subStringReverse(tmpSb, start, (start + end) / 2 - 1));
             recursion(word, tmpSb, (start + end) / 2, end);
             //뒤가 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - end, index - (start + end) / 2 + 1);
-            tmpSb.reverse();
-            tmpSb.replace((start + end) / 2, end, reverseStr);
+            tmpSb.replace((start + end) / 2, end + 1, subStringReverse(tmpSb, (start + end) / 2, end));
             recursion(word, tmpSb, start, (start + end) / 2 - 1);
             //뒤가 적을 때
             //앞이 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - ((start + end) / 2), index - start + 1);
-            tmpSb.reverse();
-            tmpSb.replace(start, (start + end) / 2, reverseStr);
+            tmpSb.replace(start, (start + end) / 2 + 1, subStringReverse(tmpSb, start, (start + end) / 2));
             recursion(word, tmpSb, (start + end) / 2 + 1, end);
             //뒤가 역순
             tmpSb = new StringBuilder(tmpStr);
-            reverseStr = tmpSb.reverse().substring(index - end, index - ((start + end) / 2 + 2));
-            tmpSb.reverse();
-            tmpSb.replace((start + end) / 2 + 1, end, reverseStr);
+            tmpSb.replace((start + end) / 2 + 1, end + 1, subStringReverse(tmpSb, (start + end) / 2 + 1, end));
             recursion(word, tmpSb, start, (start + end) / 2);
         }
     }
 
-    public static String subString(StringBuilder sb, int start, int end) {
-        //문자열 뒤집는 과정에서 문제 생겨서 함수로 뺄 예정..나중에 해야지...
-        return "";
+    public static String subStringReverse(StringBuilder sb, int start, int end) {
+        //범위만큰 문자열 뒤집는 함수
+        String s = sb.substring(start, end + 1);
+        StringBuilder sbReverse = new StringBuilder(s);
+        sbReverse.reverse();
+        return sbReverse.toString();
     }
 }
